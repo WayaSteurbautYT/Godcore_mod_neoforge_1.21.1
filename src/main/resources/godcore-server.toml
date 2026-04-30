@@ -1,0 +1,89 @@
+# Godcore SMP Server Configuration
+
+[general]
+# Enable/disable the mod
+enabled = true
+# Default personality
+default_personality = "oracle"
+# Enable voice chat integration
+voice_enabled = false
+# Enable chat reading
+chat_reading_enabled = true
+
+[ai]
+# AI Provider: gemini, ollama, huggingface
+provider = "gemini"
+# API key (set via GUI or environment variable)
+# Leave empty to configure via in-game GUI
+api_key = ""
+# AI Model (for Gemini: gemini-1.5-flash is free tier)
+model = "gemini-1.5-flash"
+# Ollama endpoint (if using Ollama)
+ollama_endpoint = "http://localhost:11434"
+# Hugging Face model (if using Hugging Face)
+huggingface_model = "meta-llama/Llama-2-7b-chat-hf"
+
+[permissions]
+# Default permission tier for new players
+default_tier = "PLAYER"
+# Permission tiers: PLAYER, MODERATOR, ADMIN
+
+[entity]
+# Enable entity spawning
+entity_enabled = true
+# Entity health
+entity_health = 100
+# Entity follow range
+entity_follow_range = 64
+# Entity attack damage
+entity_attack_damage = 10
+
+[building]
+# Enable building actions
+building_enabled = true
+# Require approval for building
+require_approval = true
+# Max blocks per build action
+max_blocks_per_action = 1000
+
+[mining]
+# Enable mining actions
+mining_enabled = true
+# Require approval for mining
+require_approval = true
+# Max blocks per mining action
+max_blocks_per_mining = 500
+
+[rollback]
+# Enable rollback system
+rollback_enabled = true
+# Max rollback time in minutes
+max_rollback_time = 60
+# Keep rollback history in days
+history_retention_days = 7
+
+[memory]
+# Enable memory system
+memory_enabled = true
+# Max memory entries per player
+max_memory_per_player = 1000
+# Memory persistence
+persist_memory = true
+
+[integrations]
+# Baritone integration
+baritone_enabled = true
+# Simple Voice Chat integration
+simple_voice_chat_enabled = true
+# GeckoLib animations
+geckolib_enabled = true
+
+[safety]
+# Enable safety systems
+safety_enabled = true
+# Prevent lava placement
+prevent_lava = true
+# Prevent tnt/explosives
+prevent_explosives = true
+# Rate limit actions (actions per minute)
+action_rate_limit = 60

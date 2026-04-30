@@ -1,0 +1,36 @@
+modLoader = "javafml"
+loaderVersion = "[2,)"
+license = "GPL-3.0 license"
+
+[[mods]]
+modId = "ldlib"
+version = "1.0.41"
+displayName = "LowDragLib"
+authors = "KilaBash, WarmthDawn"
+description = "Low Drag Lib, a library for rendering, gui, particles, synchronize"
+logoFile = "icon.png"
+displayURL = "https://github.com/Low-Drag-MC/"
+issueTrackerURL = "https://github.com/Low-Drag-MC/LDLib-Architectury/issues"
+[[mixins]]
+config="ldlib.mixins.json"
+[[accessTransformers]]
+file="META-INF/accesstransformer.cfg"
+
+[[dependencies.ldlib]]
+    modId = "neoforge"
+    type = "required"
+    versionRange = "[21.0.0-alpha,)"
+    ordering = "NONE"
+    side = "BOTH"
+[[dependencies.ldlib]]
+    modId = "minecraft"
+    type = "required"
+    versionRange = "1.21.1"
+    ordering = "NONE"
+    side = "BOTH"
+
+# Features are specific properties of the game environment, that you may want to declare you require. This example declares
+# that your mod requires GL version 3.2 or higher. Other features will be added. They are side aware so declaring this won't
+# stop your mod loading on the server for example.
+#[features.ldlib]
+#openGLVersion="[3.2,)"

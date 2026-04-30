@@ -1,0 +1,136 @@
+plugins {
+    id 'java-library'
+    id 'eclipse'
+    id 'maven-publish'
+    id 'net.neoforged.moddev' version '2.0.123'
+}
+
+version = '1.0.0'
+group = 'com.godcore'
+archivesBaseName = 'godcore'
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'Modrinth'
+        url = 'https://api.modrinth.com/maven'
+    }
+    maven {
+        name = 'GeckoLib'
+        url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+    }
+    maven {
+        name = 'Jared\'s maven'
+        url = 'https://maven.blamejared.com/'
+    }
+    maven {
+        name = 'Google'
+        url = 'https://maven.google.com/'
+    }
+    maven {
+        name = 'Fabric'
+        url = 'https://maven.fabricmc.net/'
+    }
+    maven {
+        name = 'JitPack'
+        url = 'https://jitpack.io'
+    }
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+neoForge {
+    version = "21.1.79"
+    
+    runs {
+        configureEach {
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
+            logLevel = org.slf4j.event.Level.DEBUG
+        }
+        
+        client {
+            client()
+            systemProperty 'neoforge.enabledGameTestNamespaces', 'godcore'
+            programArgument '--username'
+            programArgument 'Waya'
+        }
+        
+        server {
+            server()
+            programArgument '--nogui'
+            systemProperty 'neoforge.enabledGameTestNamespaces', 'godcore'
+        }
+        
+        data {
+            programArguments.addAll '--mod', 'godcore', '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+        }
+    }
+    
+    mods {
+        godcore {
+            sourceSet(sourceSets.main)
+        }
+    }
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+dependencies {
+    // GeckoLib for animations
+    implementation 'software.bernie.geckolib:geckolib-neoforge-1.21.1:4.7'
+    
+    // LDLib2 removed due to mixin incompatibility with NeoForge 1.21.1
+    // Using vanilla Minecraft GUI components instead
+    
+    // Simple Voice Chat integration (soft dependency) - wrong format, will implement without dependency
+    // compileOnly 'maven.modrinth:simple-voice-chat:neoforge-1.21.1:2.5.28'
+    
+    // Baritone integration (soft dependency) - wrong format, will implement basic pathfinding
+    // compileOnly 'com.github.cabaletta:baritone:1.21.1'
+    
+    // Google Gemini API - using bridge app instead to avoid dependency conflicts
+    // implementation 'com.google.genai:google-genai:0.5.0'
+    
+    // WebSocket for bridge communication
+    implementation 'org.java-websocket:Java-WebSocket:1.5.4'
+    
+    // JSON processing
+    implementation 'com.google.code.gson:gson:2.10.1'
+    
+    // HTTP client for API calls
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+processResources {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
+jar {
+    manifest {
+        attributes([
+            "Specification-Title"     : "Godcore",
+            "Specification-Vendor"    : "Waya Steurbaut",
+            "Specification-Version"   : "1",
+            "Implementation-Title"    : project.name,
+            "Implementation-Version"  : "${version}",
+            "Implementation-Vendor"   : "Waya Steurbaut",
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+        }
+    }
+}

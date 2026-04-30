@@ -1,0 +1,30 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="MIT License"
+
+[[mods]]
+modId="godcore"
+version="1.0.0"
+displayName="Godcore"
+description='''
+A revolutionary Minecraft NeoForge mod that adds a living AI entity/player into the world.
+Godcore behaves like a real player, assistant, god, companion, builder, guardian, or chaotic being depending on settings.
+Players communicate through chat or voice, and the AI can interact with the world through approved actions.
+
+Created by Waya Steurbaut
+YouTube: https://www.youtube.com/@wayacreate
+'''
+
+[[dependencies.godcore]]
+    modId="neoforge"
+    type="required"
+    versionRange="[21.1.0,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.godcore]]
+    modId="minecraft"
+    type="required"
+    versionRange="[1.21.1]"
+    ordering="NONE"
+    side="BOTH"
